@@ -9,8 +9,9 @@ name: Tests
 jobs:
   test:
     name: Node.js
-    runs-on: ubuntu-latest
+    runs-on: puppeteer:latest
     steps:
       - uses: actions/checkout@v2
       - name: Run All Node.js Tests in Docker
-        run: docker-compose up --build -d -f docker-compose.samples.yml
+        run: yarn \
+          yarn samples
