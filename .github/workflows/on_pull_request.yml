@@ -24,7 +24,7 @@ jobs:
             ttf-freefont \
             nss
       - name: Run All Node.js Tests in Docker
-        environment:
+        env:
           PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: true
         run: yarn \
           yarn samples
