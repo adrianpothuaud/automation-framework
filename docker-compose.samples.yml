@@ -1,0 +1,7 @@
+services:
+  puppeteer:
+    image: puppeteer:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: yarn samples
