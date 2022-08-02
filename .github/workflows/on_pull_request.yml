@@ -8,25 +8,9 @@ name: Tests
 
 jobs:
   test:
-    name: 'Node.js v${{ matrix.node }}'
+    name: Node.js
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node:
-          - 16
     steps:
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '${{ matrix.node }}'
       - uses: actions/checkout@v2
-      - name: 'Cache node_modules'
-        uses: actions/cache@v2
-        with:
-          path: ~/.yarn
-          key: ${{ runner.os }}-node-v${{ matrix.node }}-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-node-v${{ matrix.node }}-
-      - name: Install Dependencies
-        run: yarn
-      - name: Run All Node.js Tests
-        run: yarn samples
+      - name: Run All Node.js Tests in Docker
+        run: docker-compose up --build -d -f docker-compose.samples.yml
