@@ -1,6 +1,5 @@
 name: Tests
 'on':
-  push:
   pull_request:
     types:
       - opened
@@ -30,4 +29,4 @@ jobs:
       - name: Install Dependencies
         run: yarn
       - name: Run All Node.js Tests
-        run: yarn test
+        run: yarn samples
