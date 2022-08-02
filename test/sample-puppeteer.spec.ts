@@ -30,7 +30,7 @@ describe('@sample @web Puppeteer', function() {
       waitUntil: 'networkidle2',
     });
     await page.pdf({
-      path: 'test-resources/screenshots/sample-puppeteer/hn.pdf',
+      path: 'test-resources/documents/sample-puppeteer/example.pdf',
       format: 'a4',
     });
   }).timeout(5000);
