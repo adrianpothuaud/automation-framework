@@ -5,14 +5,18 @@ describe('@sample @web Puppeteer', function() {
   let page: puppeteer.Page;
 
   it('init browser', async function() {
-    browser = await puppeteer.launch({
-      headless: true,
-      executablePath: '/usr/bin/chromium-browser',
-      args: [
-        '--no-sandbox',
-        '--disable-gpu',
-      ],
-    });
+    browser = await puppeteer.launch(
+      process.env.GITHUB_ACTIONS ?
+      {
+        headless: true,
+        executablePath: '/usr/bin/chromium-browser',
+        args: [
+          '--no-sandbox',
+          '--disable-gpu',
+        ],
+      }:
+      {},
+    );
   });
   it('create browser page', async function() {
     page = await browser.newPage();
@@ -26,6 +30,8 @@ describe('@sample @web Puppeteer', function() {
     });
   });
   it('save page as pdf', async function() {
+    // eslint-disable-next-line no-invalid-this
+    this.retries(4);
     await page.goto('https://news.ycombinator.com', {
       waitUntil: 'networkidle2',
     });
